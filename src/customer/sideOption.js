@@ -3,6 +3,10 @@ import Header from "./header";
 import Sides from "./sides";
 import "./menuContainer.css";
 
+/**
+* Display sides page in menu
+* @function
+*/
 
 const sideOption = () => {
     return (
