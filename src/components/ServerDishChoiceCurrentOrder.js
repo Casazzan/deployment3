@@ -1,6 +1,5 @@
 import '../index.css';
 import { useState, useEffect } from "react";
-import Settings from './Settings';
 import axios from 'axios';
 
 var test = [[[""]]];
@@ -13,6 +12,100 @@ var displayName = ['Honey Seasame Chicken', 'Orange Chicken', 'Black Pepper Angu
    * @constructor
    */
   const ServerDishChoiceCurrentOrder = () => {
+
+    const [translations, setTranslations] = useState([
+      { translatedText: "Honey Sesame Chicken" }, 
+      { translatedText: "Orange Chicken" }, 
+      { translatedText: "Black Pepper Angus Steak" }, 
+      { translatedText: "String Bean Chicken Breast" }, 
+      { translatedText: "Sweetfire Chicken Breast" }, 
+      { translatedText: "Kung Pao Chicken" }, 
+      { translatedText: "Black Pepper Chicken" }, 
+      { translatedText: "Grilled Teriyaki Chicken" }, 
+      { translatedText: "Broccoli Beef" }, 
+      { translatedText: "Bejing Beef" }, 
+      { translatedText: "Honey Walnut Shrimp" }, 
+      { translatedText: "Mushroom Chicken" }, 
+      { translatedText: "Eggplant Tofu" }, 
+
+      { translatedText: "Mixed Vegetables" },
+      { translatedText: "Chow Mein" },
+      { translatedText: "Fried Rice" },
+      { translatedText: "White Steamed Rice" },
+      { translatedText: "Brown Steamed Rice" },
+
+      { translatedText: "Chicken Egg Roll" },
+      { translatedText: "Crispy Shrimp" },
+
+      { translatedText: "Bowl" },
+      { translatedText: "Plate" },
+      { translatedText: "Bigger Plate" },
+    ])
+
+    const changeLanguage = () => {
+      // var selected = document.getElementById("selectedLanguageDiv").innerHTML;
+      if (JSON.parse(localStorage.getItem("language")) != "en") {
+        console.log("sent query")
+        const encodedParams = new URLSearchParams();
+        encodedParams.append("q", "Honey Sesame Chicken");
+        encodedParams.append("q", "Orange Chicken");
+        encodedParams.append("q", "Black Pepper Angus Steak");
+        encodedParams.append("q", "String Bean Chicken Breast");
+        encodedParams.append("q", "Sweetfire Chicken Breast");
+        encodedParams.append("q", "Kung Pao Chicken");
+        encodedParams.append("q", "Black Pepper Chicken");
+        encodedParams.append("q", "Grilled Teriyaki Chicken");
+        encodedParams.append("q", "Broccoli Beef");
+        encodedParams.append("q", "Bejing Beef");
+        encodedParams.append("q", "Honey Walnut Shrimp");
+        encodedParams.append("q", "Mushroom Chicken");
+        encodedParams.append("q", "Eggplant Tofu");
+        
+        encodedParams.append("q", "Mixed Vegetables");
+        encodedParams.append("q", "Chow Mein");
+        encodedParams.append("q", "Fried Rice");
+        encodedParams.append("q", "White Steamed Rice");
+        encodedParams.append("q", "Brown Steamed Rice");
+
+        encodedParams.append("q", "Chicken Egg Roll");
+        encodedParams.append("q", "Crispy Shrimp");
+        
+        encodedParams.append("q", "Bowl");
+        encodedParams.append("q", "Plate");
+        encodedParams.append("q", "Bigger Plate");
+
+        encodedParams.append("target", JSON.parse(localStorage.getItem("language")));  
+        encodedParams.append("source", "en");
+  
+        const options = {
+          method: 'POST',
+          url: 'https://google-translate1.p.rapidapi.com/language/translate/v2',
+          headers: {
+            'content-type': 'application/x-www-form-urlencoded',
+            'Accept-Encoding': 'application/gzip',
+            'X-RapidAPI-Key': '8fbc873fd8msh5d43e6022f22f64p15f17ejsnbb456384ba17',
+            'X-RapidAPI-Host': 'google-translate1.p.rapidapi.com'
+          },
+          data: encodedParams
+        };
+  
+        axios.request(options).then(function (response) {
+            const translatedArray = response.data.data.translations
+            setTranslations(translatedArray)
+        }).catch(function (error) {
+            console.error(error);
+        });
+      }
+      else {
+        console.log("english")
+      }
+    }
+
+    useEffect(() => {    
+      changeLanguage()
+      console.log("Test", translations)
+    }, [setTranslations]);
+
     var [orders, setOrders] = useState([]);
     var mylistoforders2 = JSON.parse(localStorage.getItem('CurrentOrder'));
       
@@ -55,20 +148,20 @@ var displayName = ['Honey Seasame Chicken', 'Orange Chicken', 'Black Pepper Angu
 
                       //------------------------------------------
                       if (subItems == "bowl") {
-                        return ( <span onClick={() => {handlechange(index,subIndex,subsubIndex);}}><h3>Bowl</h3></span> )
+                        return ( <span onClick={() => {handlechange(index,subIndex,subsubIndex);}}><h3>{translations[20].translatedText}</h3></span> )
                       } 
                       else if (subsubItems == "plate") {
-                        return ( <span onClick={() => {handlechange(index,subIndex,subsubIndex);}}><h3>Plate</h3></span> )
+                        return ( <span onClick={() => {handlechange(index,subIndex,subsubIndex);}}><h3>{translations[21].translatedText}</h3></span> )
                       } 
                       else if (subsubItems == "bigger plate") {
-                        return ( <span onClick={() => {handlechange(index,subIndex,subsubIndex);}}><h3>Bigger Plate</h3></span> )
+                        return ( <span onClick={() => {handlechange(index,subIndex,subsubIndex);}}><h3>{translations[22].translatedText}</h3></span> )
                       }
                       else if (subsubItems == "") {
                         return ( <span></span> ) //return nothing
                       } 
                       else {
                         return (
-                          <span onClick={() => {handlechange(index,subIndex,subsubIndex);}}><li>{databaseName.indexOf(subsubItems) == -1 ? subsubItems : displayName[databaseName.indexOf(subsubItems)]}</li></span>
+                          <span onClick={() => {handlechange(index,subIndex,subsubIndex);}}><li>{databaseName.indexOf(subsubItems) == -1 ? subsubItems : translations[databaseName.indexOf(subsubItems)].translatedText}</li></span>
                         )
                       }
                       //--------------------------------------------
