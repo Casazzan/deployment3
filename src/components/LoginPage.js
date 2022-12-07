@@ -47,13 +47,13 @@ const LoginPage = () => {
             'onsuccess': onSuccessOther
           });
         }, []);
-        // const initClient = () => {
-        //       gapi.client.init({
-        //       clientId: clientId,
-        //       scope: 'email'
-        //     });
-        //  };
-        //  gapi.load('client:auth2', initClient);
+        const initClient = () => {
+              gapi.client.init({
+              clientId: clientId,
+              scope: 'email'
+            });
+         };
+         gapi.load('client:auth2', initClient);
          
     return (
       <div class = "HomePageScreen">
