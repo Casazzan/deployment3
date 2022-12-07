@@ -7,24 +7,37 @@ import axios from 'axios'
 //         <img className="FooterLogo" src={logo}/>
 const Home = () => {
 
-  const [titleText, setTitleText] = useState('Manager View');
+  const [translations, setTranslations] = useState("Manager View") 
 
   window.addEventListener('storage', (e) => {
       console.log("change to local storage!");
-      changeLanguage("Manager View");
+      changeLanguage();
+      window.location.reload(false)
   });
 
   useEffect(() => {
       // Update the document title using the browser API
       console.log("local storage is: ", JSON.parse(localStorage.getItem("language")));
-      changeLanguage("Manager View");
+      if (localStorage.getItem("language") == null) {
+        localStorage.setItem("language", JSON.stringify("en"));
+      }
+      console.log("change language")
+      changeLanguage();
   });
 
-  const changeLanguage = (input) => {
+  const changeLanguage = () => {
     // var selected = document.getElementById("selectedLanguageDiv").innerHTML;
+    if (JSON.parse(localStorage.getItem("language")) == null) {
+      localStorage.setItem("langauge", JSON.stringify("en"));
+    }
     if (JSON.parse(localStorage.getItem("language")) != "en") {
       const encodedParams = new URLSearchParams();
-      encodedParams.append("q", input);
+      encodedParams.append("q", "Manager View");
+      encodedParams.append("q", "Home");
+      encodedParams.append("q", "Sales");
+      encodedParams.append("q", "Employee");
+      encodedParams.append("q", "Inventory");
+      encodedParams.append("q", "Accessibility");
       encodedParams.append("target", JSON.parse(localStorage.getItem("language")));
       encodedParams.append("source", "en");
 
@@ -41,22 +54,33 @@ const Home = () => {
       };
 
       axios.request(options).then(function (response) {
-          setTitleText(response.data.data.translations[0].translatedText);
+          console.log("Update:", response.data);
+          setTranslations(response.data.data.translations[0].translatedText);
+          localStorage.setItem("home", JSON.stringify(response.data.data.translations[1].translatedText));
+          localStorage.setItem("sales", JSON.stringify(response.data.data.translations[2].translatedText));
+          localStorage.setItem("employee", JSON.stringify(response.data.data.translations[3].translatedText));
+          localStorage.setItem("inventory", JSON.stringify(response.data.data.translations[4].translatedText));
+          localStorage.setItem("accessibility", JSON.stringify(response.data.data.translations[5].translatedText));
       }).catch(function (error) {
           console.error(error);
       });
     }
     else {
-      setTitleText(input)
+      setTranslations("Manager View");
+      localStorage.setItem("home", JSON.stringify("Home"));
+      localStorage.setItem("sales", JSON.stringify("Sales"));
+      localStorage.setItem("employee", JSON.stringify("Employee"));
+      localStorage.setItem("inventory", JSON.stringify("Inventory"));
+      localStorage.setItem("accessibility", JSON.stringify("Accessibility"));
     }
-  }
+}
   return (
     <div>
       <Sidebar />
       <div className="Parallax">
         <div className="TitleDot"> 
           <h1>
-          {titleText}
+          {translations}
           </h1>
         </div>
       </div>

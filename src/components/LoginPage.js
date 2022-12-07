@@ -50,7 +50,8 @@ const LoginPage = () => {
     return (
       <div class = "HomePageScreen">
             <div class = "homeLogo"></div>
-            {/* <GoogleLogin
+      {/*
+            <GoogleLogin
             clientId={clientId}
             render={renderProps => (
             <button class = "HomePageButton" id = "customer" onClick={renderProps.onClick}>Login</button>
