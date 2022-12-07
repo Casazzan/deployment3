@@ -7,7 +7,10 @@ import TotalPrice from './TotalPrice';
 import ServerCheckoutButton from './ServerCheckoutButton';
 import PandaLogo from './panda-logo.png';
 
-
+ /**
+ * Server side checkout screen component
+ * @function - generates navigation buttons, order display, and current order price
+ */
 const ServerCheckout = () => {
 
   let navigate = useNavigate();
