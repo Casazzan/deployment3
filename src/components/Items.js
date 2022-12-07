@@ -5,6 +5,8 @@ import ServerDishChoiceCurrentOrder from './ServerDishChoiceCurrentOrder';
 import TotalPrice from './TotalPrice';
 import PandaLogo from './panda-logo.png';
 import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from "react";
+import axios from 'axios';
 import MakeSeasonal from './MakeSeasonal';
 
  /**
@@ -13,6 +15,53 @@ import MakeSeasonal from './MakeSeasonal';
  * @param {Component} props - Holds the current order, the current price, and the screen the user is currently on. Also has localSorage code for persistance when the screen is reloaded.
  */
 const Items = (props) => {
+
+    const [translations, setTranslations] = useState([
+      { translatedText: "Add to Order" },
+      //{ translatedText: "Price: " }
+    ])
+
+    const changeLanguage = () => {
+      // var selected = document.getElementById("selectedLanguageDiv").innerHTML;
+      if (JSON.parse(localStorage.getItem("language")) != "en") {
+        console.log("sent query")
+        const encodedParams = new URLSearchParams();
+
+        encodedParams.append("q", "Add to Order");
+        //encodedParams.append("q", "Price: ");
+
+        encodedParams.append("target", JSON.parse(localStorage.getItem("language")));  
+        encodedParams.append("source", "en");
+
+        const options = {
+          method: 'POST',
+          url: 'https://google-translate1.p.rapidapi.com/language/translate/v2',
+          headers: {
+            'content-type': 'application/x-www-form-urlencoded',
+            'Accept-Encoding': 'application/gzip',
+            'X-RapidAPI-Key': '8fbc873fd8msh5d43e6022f22f64p15f17ejsnbb456384ba17',
+            'X-RapidAPI-Host': 'google-translate1.p.rapidapi.com'
+          },
+          data: encodedParams
+        };
+
+        axios.request(options).then(function (response) {
+            const translatedArray = response.data.data.translations
+            setTranslations(translatedArray)
+        }).catch(function (error) {
+            console.error(error);
+        });
+      }
+      else {
+        console.log("english")
+      }
+    }
+
+    useEffect(() => {    
+      changeLanguage()
+      console.log("Test", translations)
+    }, [setTranslations]);
+
     let navigate = useNavigate();
 
     var test = [[[""]]];
@@ -44,7 +93,7 @@ const Items = (props) => {
           <div class = "ServerItemOrder"><ServerDishChoiceCurrentOrder />
             <div id = "ServerItemPrice" onClick={() => {window.location.reload()}}><TotalPrice /></div>
           </div>
-          <div class = "NavButton" id = "ItemAdd" onClick={() => {navigate("/ServerMenu")}}><ItemChoiceButton Name = "Add To Order" /></div>
+          <div class = "NavButton" id = "ItemAdd" onClick={() => {navigate("/ServerMenu")}}><ItemChoiceButton Name = {translations[0].translatedText} /></div>
           <div id = "ItemButtons">
             <div class = "EntreeButton" id = "honey_seasame_chicken" onClick={() => {addToCart("honey_seasame_chicken", 1)}}><ItemChoiceButton Name = "HS CKN"/></div>
             <div class = "EntreeButton" id = "orange_chicken" onClick={() => {addToCart("orange_chicken", 1)}}><ItemChoiceButton Name = "O CKN"/></div>
@@ -75,3 +124,4 @@ const Items = (props) => {
   }
   
   export default Items
+
