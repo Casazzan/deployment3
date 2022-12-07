@@ -159,8 +159,10 @@ const CustMainPage = (props) => {
          <p className = "backgroundText2">
          {translations[5].translatedText} </p>
 
-         <LanguageSettings languageList={languages}/>
-        <button className="SubmitLanguage" onClick={() => changeLanguage()}>{translations[0].translatedText}</button>
+
+          <LanguageSettings className="LanguageBox" languageList={languages} />
+
+        <button className="SubmitLanguageBox" onClick={() => changeLanguage()}>{translations[0].translatedText}</button>
 
       </div>
 
