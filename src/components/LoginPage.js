@@ -38,15 +38,23 @@ const LoginPage = () => {
         auth2.disconnect();
     };
     useEffect(() => {
-        const initClient = () => {
-              gapi.client.init({
-              clientId: clientId,
-              scope: 'email'
-            });
-         };
-         gapi.load('client:auth2', initClient);
+        window.gapi.signin2.render('gs2', {
+            'scope': 'https://www.googleapis.com/auth/plus.login',
+            'width': 200,
+            'height': 50,
+            'longtitle': true,
+            'theme': 'dark',
+            'onsuccess': onSuccessOther
+          });
+        }, []);
+        // const initClient = () => {
+        //       gapi.client.init({
+        //       clientId: clientId,
+        //       scope: 'email'
+        //     });
+        //  };
+        //  gapi.load('client:auth2', initClient);
          
-     });
     return (
       <div class = "HomePageScreen">
             <div class = "homeLogo"></div>
@@ -62,6 +70,7 @@ const LoginPage = () => {
             cookiePolicy={'none'}
             /> */}
           {/* <div class = "HomePageButton" id = "Login" onClick={() => {navigate("/View")}}><HomePageNavButton Name = "Login" /></div> */}
+          <div id="gs2"></div>
           <div class = "HomePageButton" id = "Public" onClick={() => {navigate("/CustMainPage")}}><HomePageNavButton Name = "Public View" /></div>
       </div>
       )
