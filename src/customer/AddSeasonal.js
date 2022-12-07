@@ -3,6 +3,12 @@ import '../index2.css';
 import seasonal from './comingSoon.png';
 import ItemBox from "./itemBox";
 
+
+/**
+* Implements functionality to add seasonal item to menu
+* @class
+*/
+
 class AddSeasonal extends React.Component {
 
     constructor(props) {

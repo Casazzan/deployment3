@@ -11,6 +11,11 @@ import AddSeasonal from "./PublicAddSeasonal";
 
 import {useState, useEffect} from 'react'
 import axios from 'axios'
+
+/**
+* Implements public menu appetizer tab
+* @function
+*/
       
 const PublicApps = (props) => {
       

@@ -3,9 +3,15 @@ import {useJsApiLoader,GoogleMap,Marker,Autocomplete,DirectionsRenderer,} from '
 import { useRef, useState } from 'react'
 import './CustMainPage.css'
 import PandaMarkerImg from './pandaMapMarker.png'
+import {MarkerF} from '@react-google-maps/api'
 
 const center = { lat: 30.6122297, lng: -96.3412229 }
 const libraries = ['places']
+
+/**
+* Creates a new map
+* @class
+*/
   
 function PandaMap() {
     
@@ -28,7 +34,17 @@ function PandaMap() {
     const endRef = useRef()
   
     if (!isLoaded) { return <div> Loading... </div> }
-  
+
+    /*
+    var iconBase = 'https://maps.google.com/mapfiles/kml/shapes';
+    function makePandaMarkers() {
+      var marker1 = new google.maps.Marker({
+        position: {lat: 30.6122297, lng: -96.3412229},
+        icon: iconBase + 'pandaMapMarker.png',
+        map: map
+      });
+    }*/
+    
     async function search() {
 
       if (startRef.current.value === '' || endRef.current.value === '') {
@@ -76,18 +92,20 @@ function PandaMap() {
          
           <GoogleMap
             center={center}
-            zoom={15}
+            zoom={14}
             mapContainerStyle={{ width: '100%', height: '100%' }}
             options={{ zoomControl: false, streetViewControl: false, mapTypeControl: false, fullscreenControl: false,}}
             onLoad={map => setMap(map)}
             
           >
-            <Marker position={{lat: 30.6122297, lng: -96.3412229}} tile = "MSC Panda" /> {}
-            <Marker position={{lat: 30.617870, lng: -96.323310}} tile = "Texas Panda" /> {}
-            <Marker position={{lat: 30.623080, lng: -96.336930}} tile = "Polo Panda" /> {}
-     
+
+              <MarkerF className = "pMarker" id = "pandamarker" position={{lat: 30.6122297, lng: -96.3412229}} tile = "MSC Panda" /> {}
+              <MarkerF className = "pMarker" position={{lat: 30.617870, lng: -96.323310}} tile = "Texas Panda" /> {}
+              <MarkerF className = "pMarker" position={{lat: 30.623080, lng: -96.336930}} tile = "Polo Panda" /> {}
+            
 
             <Marker position={center} /> {directionsResp && ( <DirectionsRenderer directions={directionsResp} /> )}
+
 
             
 

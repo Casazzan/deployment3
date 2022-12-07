@@ -4,7 +4,11 @@ import { useState, useEffect } from "react";
 import axios from 'axios'
 import LanguageSettings from './LanguageSettings'
 
-
+/**
+* Gives options for accessibility, updates navbar and page after change
+* @function
+* @returns {html} language selector and button
+*/
 function Accessibility() {
 
   const [language, setLanguage] = useState('');
@@ -16,6 +20,11 @@ function Accessibility() {
       changeText()
   });
   
+/**
+* Queries languages avalible to translate to 
+* @function
+* @returns {obj[]} array of language objects
+*/
   const getLanguages = () => {
     const options = {
       method: 'GET',
@@ -39,6 +48,11 @@ function Accessibility() {
     });
   }
 
+/**
+* Changes text on page to reflect selected language
+* @function
+* @returns {html} changes all text and returns html
+*/
   const changeText = () => {
     // var selected = document.getElementById("selectedLanguageDiv").innerHTML;
     if (localStorage.getItem("language") == null) {

@@ -4,6 +4,11 @@ import Settings from '../components/Settings';
 import { useState, useEffect } from "react";
 import axios from 'axios'
 
+/**
+* Displays Accessibility Settings 
+* @function
+* @returns {html} to display 
+*/
 const Accessibility = () => {
 
   /*manually create fields for each translation???*/

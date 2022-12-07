@@ -1,5 +1,11 @@
 import {useState} from 'react';
 
+/**
+* Creates selctor of employees
+* @ param {props} rosterList - list of employee objects  
+* @function
+* @returns {selector} to display 
+*/
 const RosterSelector = (props) => {
 
   const [selectedEmployee, setSelectedEmployee] = useState('');

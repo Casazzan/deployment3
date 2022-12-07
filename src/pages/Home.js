@@ -4,7 +4,11 @@ import logo from '../team52.png'
 import { useState, useEffect } from "react";
 import axios from 'axios'
 
-//         <img className="FooterLogo" src={logo}/>
+/**
+* Displays main page and sets initial local storage
+* @function
+* @returns {html} to display 
+*/
 const Home = () => {
 
   const [translations, setTranslations] = useState("Manager View") 
