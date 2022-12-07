@@ -1,0 +1,56 @@
+SCRUM Meeting 2 for Panda Express Point of Sale System Team 52
+Prepared by: Alex De Young
+Meeting Date: 12/1
+Meeting Attendees
+Alex De Young
+Devan Shea
+Nathan Casazza
+Nicole Clements
+Anna Slater
+Meeting Agenda Items
+ Discuss the  google maps api and where to implement it
+ Discuss the progress of the manager side
+ Discuss where to implement the OAuth API
+Discuss how to authenticate users through their comparing their email to authorized ones in the database
+Status Update Since Last Meeting
+Accomplishments:
+Finished the server side setup 
+Finished making the server side order persistent when the screen is reloaded
+
+Tasks Completed:
+Task Description
+Assigned to
+Completed? (yes/no)
+Remaking the order side with a screen on the side showing the current order
+Devan
+Yes
+Make the server side order persistent
+Devan/Alex
+Yes
+Added the ability to add seasonal items to the server and customer menus
+Nicole
+Yes
+
+Before The Next Meeting
+Plans:
+ Find a way to use the google maps API
+ Set up the translate API
+Make another menu for all of the privileged stuff that only the manager should be able to access and set up
+Set up documentation programs and start working on that
+
+Task Assignments:
+Task Description
+Assigned to
+Make another menu for all of the privileged stuff that only the manager should be able to access and set up
+Devan
+Finish the OAuth setup for the main menu
+Alex
+Set up everything needed for documentation
+Alex
+Research API’s and how to implement in react
+Anna/Nicole
+Authenticate users through OAuth by adding to database
+Alex
+
+Minutes from Previous Meeting
+We decided we needed to make a public tab for customers. The tab won’t have ordering power, however the customer will be able to see what the restaurant has and make an educated decision on whether they want to eat there. This new tab also has google maps so the customer can find the nearest panda express and navigate to there. We had some trouble finding documentation apps for Javascript that work with React, we were still searching for a documentation app when we left the meeting, and assigned that task to anyone who didn’t have a job. We did a complete overhaul of the server side and now it displays the order and updates every time a new item is ordered or a new item is taken off the current order, which is in line with our users' demand for more user feedback. We are going to find a documentation app by the next SCRUM meeting.
