@@ -7,6 +7,11 @@ import {MarkerF} from '@react-google-maps/api'
 
 const center = { lat: 30.6122297, lng: -96.3412229 }
 const libraries = ['places']
+
+/**
+* Creates a new map
+* @class
+*/
   
 function PandaMap() {
     

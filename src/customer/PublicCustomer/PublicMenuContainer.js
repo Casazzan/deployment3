@@ -15,13 +15,16 @@ import mChicken from '../mChicken.png';
 import epTofu from '../epTofu.png';
 import AddSeasonal from "./PublicAddSeasonal";
 
-
+/**
+* Displays content on public customer menu
+* @function
+*/
 
 
 import {useState, useEffect} from 'react'
 import axios from 'axios'
   
-const PublicMenuContainer = (props) => {
+const PublicMenuContainer = () => {
   
           const [translations, setTranslations] = useState([
             { translatedText: "Honey Seasame Chicken" }, 

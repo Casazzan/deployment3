@@ -3,6 +3,10 @@ import Header from "./header";
 import Entrees from "./entrees";
 import "./menuContainer.css";
 
+/**
+* Display entrees page in menu
+* @function
+*/
 
 const entreeOption = () => {
     return (

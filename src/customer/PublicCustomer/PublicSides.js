@@ -13,6 +13,11 @@ import AddSeasonal from "./PublicAddSeasonal";
 
 import {useState, useEffect} from 'react'
 import axios from 'axios'
+
+/**
+* Implement public menu sides tab
+* @function
+*/
       
 const PublicSides = (props) => {
       

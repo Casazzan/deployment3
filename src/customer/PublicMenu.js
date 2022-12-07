@@ -6,6 +6,11 @@ import Sides from "./PublicCustomer/PublicSides";
 import Appetizers from "./PublicCustomer/PublicApps";
 import "./container.css";
 
+/**
+* Displays content on public customer menu
+* @class
+*/
+
 class PublicMenu extends React.Component {
 
   constructor(props) {

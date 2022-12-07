@@ -8,8 +8,12 @@ import { useNavigate } from 'react-router-dom';
 import "../../customer/container.css";
 import { ChakraProvider, theme } from '@chakra-ui/react'
 
+/**
+* Public customer view find a store page
+* @function
+*/
 
-const StoreFinder = (props) => {
+const StoreFinder = () => {
 
     let navigate = useNavigate();
 

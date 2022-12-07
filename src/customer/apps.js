@@ -10,6 +10,12 @@ import AddSeasonal from "./AddSeasonal";
 import {useState, useEffect} from 'react'
 import axios from 'axios'
 
+/**
+* Creates appetizer section on menu 
+* @function
+*/
+
+
 const Apps = (props) => {
 
         const [translations, setTranslations] = useState([
