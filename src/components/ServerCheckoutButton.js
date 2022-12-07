@@ -1,6 +1,13 @@
 import React, { Component } from 'react'
 import "../index2.css"
 
+/**
+ * Queries the database for the price of a dish, taking into account the dish and everything in it
+ * @function
+ * @param {int} dishId - the ID of the entrees dish (bowl, plate, or bigger plate).
+ * @param {string} idString - string of ID's of the items inside the dish.
+ * @returns {double} The price of the dish passed in.
+ */
 var callAPIAsyncGetPrice = async (dishId, idString) => {
     //console.log((await (await fetch(`http://localhost:5000/dish_list/price?dish_id=${dishId}${idString}`)).json()));
     const promise = fetch(`http://localhost:5000/dish_list/price?dish_id=${dishId}${idString}`);
@@ -9,11 +16,12 @@ var callAPIAsyncGetPrice = async (dishId, idString) => {
     return result.price;
 }
 
-var addToOrderHistory = async (dishId, idString) => {
-    //console.log((await (await fetch(`http://localhost:5000/dish_list/price?dish_id=${dishId}${idString}`)).json()));
-    const promise = fetch(`http://localhost:5000/order_history/price?dish_id=${dishId}${idString}`);
-}
-
+/**
+ * Calculates the price of all the dishes in the current order
+ * @function
+ * @param {int} MyListOfOrders - 3 Dimensional array containing the user's current order
+ * @return {double} Price of all the dishes in the current order to 2 decimal places
+ */
 const returnPrice = async (MyListOfOrders) => {
     var totalPrice = 0;
     var timesRun = 0;
@@ -69,6 +77,11 @@ const returnPrice = async (MyListOfOrders) => {
     return totalPrice.toFixed(2);
 }
 
+/**
+ * All of the logic for sending the user's current order to the database
+ * @function
+ * @param {int} MyListOfOrders - 3 Dimensional array containing the user's current order 
+ */
 const orderTheItems = async (MyListOfOrders) => {
     for (var i = 0; i < MyListOfOrders.length; i++){
         var entrees = [];
@@ -156,23 +169,37 @@ const orderTheItems = async (MyListOfOrders) => {
     }
 }
 
-
+/**
+ * Class for all Server Checkout Button functionality
+ */
 class ServerCheckoutButton extends Component   {
 
-
+    /**
+     * Constructor for ServerCheckoutButton
+     * @constructor
+     * @param {Component} props - holds the local storage for current order persistence and modification
+     */
     constructor(props) {
         super(props);
     }
 
+    /**
+     * When the screen is reloaded, makes sure the button is reloaded and displayed again
+     * @function
+     */
     async componentDidMount() {
         // const price = await returnPrice(JSON.parse(localStorage.getItem('CurrentOrder')));
         // const price = await returnPrice(JSON.parse(localStorage.getItem('CurrentOrder')));
     }
 
+    /**
+     * Within html for server checkout button: orders items, clears items, and reloads page to display changes
+     * 
+     */
     render(){
         return (
             // <div>{returnPrice(JSON.parse(localStorage.getItem('CurrentOrder')))}</div>
-            <div class = "ServerCheckoutButton" id = "ServerCheckoutText" onClick = {() => {orderTheItems(JSON.parse(localStorage.getItem('CurrentOrder')))}}>Checkout</div>
+            <div class = "ServerCheckoutButton" id = "ServerCheckoutText" onClick = {() => {orderTheItems(JSON.parse(localStorage.getItem('CurrentOrder'))); localStorage.setItem('CurrentOrder', JSON.stringify([[[]]])); window.location.reload()}}>Checkout</div>
             // <div>Pending</div>
         )
     }

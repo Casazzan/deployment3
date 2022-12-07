@@ -7,11 +7,21 @@ import PandaLogo from './panda-logo.png';
 import { useNavigate } from 'react-router-dom';
 import MakeSeasonal from './MakeSeasonal';
 
+ /**
+ * Server side menu items display
+ * @function
+ * @param {Component} props - Holds the current order, the current price, and the screen the user is currently on. Also has localSorage code for persistance when the screen is reloaded.
+ */
 const Items = (props) => {
     let navigate = useNavigate();
 
     var test = [[[""]]];
-
+    /**
+     * Adds the selected item to the current order, displaying it on the Current Order element
+     * @function
+     * @param {string} itemToAdd - the name of the item selected
+     * @param {int} index - the type of the item selected (1 entree, 2 side, 3 appetizer)
+     */
     const addToCart = (itemToAdd, index) => {
 
 
