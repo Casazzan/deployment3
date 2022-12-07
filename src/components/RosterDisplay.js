@@ -2,6 +2,12 @@ import React from 'react'
 import {useState, useEffect} from 'react'
 import axios from 'axios'
 
+/**
+* Displays roster within a table
+* @ param {props} rosterList - list of employee objects  
+* @function
+* @returns {table} to display 
+*/
 const RosterDisplay = (props) => {
   const [translations, setTranslations] = useState([
     { translatedText: "Employee_Name" }, 

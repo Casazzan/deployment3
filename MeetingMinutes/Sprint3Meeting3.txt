@@ -1,0 +1,37 @@
+SCRUM Meeting 3 for Panda Express Point of Sale System Team 52
+Prepared by: Alex De Young
+Meeting Date: 12/4
+Meeting Attendees
+Alex De Young
+Devan Shea
+Nathan Casazza
+Nicole Clements
+Anna Slater 
+Meeting Agenda Items
+ Discuss finalizing the product
+ Discuss JSDoc for documentation, get done in the next 2 days
+Status Update Since Last Meeting
+Accomplishments:
+ Set up the google maps API
+Set up OAuth API button
+Set up translate API
+
+Tasks Completed:
+Task Description
+Assigned to
+Completed? (yes/no)
+Set up the google maps API
+Nicole
+Yes
+Set up OAuth API button
+Alex
+Yes
+Set up translate API
+Anna
+Yes
+OAuth compares email to the authorized ones on the database
+Alex
+Yes
+
+Minutes from Previous Meeting
+We made the server side persistent just like the customer side, meaning that when the page is reloaded or refreshed, the server doesn’t lose everything he made for the current customer. This increases customer satisfaction in the case of a network reset or potential power outage and gets their order to them faster. We also completed any more things we needed on the server side, completely finishing it. We were halfway through implementing a lot of API’s. The google maps API was the only API to be finished for the publicly accessible menu. The translate API is going to take a lot more work than expected because we have to wrap all text in translate tags in order to translate them, meaning that we have to edit all of the text we wrote on every page. The OAuth was almost done but we need to make sure the email token gotten from the login is legitimate and in the authorized email list from the backend database. Once that is done everything from OAuth should be complete. We need to complete all API’s before or directly after the next scrum meeting so we can focus on documentation afterwards.

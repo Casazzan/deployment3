@@ -3,6 +3,11 @@ import "../App.css";
 import Summary from './OrderHistoryDisplay'
 import axios from 'axios'
 
+/**
+* Creates and displays order history
+* @function
+* @returns {html} to display 
+*/
 function OrderHistory() {
   const [orderHistorySummary, setOrderHistorySummary] = useState('0');
 

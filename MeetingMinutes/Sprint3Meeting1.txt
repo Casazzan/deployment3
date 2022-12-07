@@ -1,0 +1,48 @@
+SCRUM Meeting 1 for Panda Express Point of Sale System Team 52
+Prepared by: Alex De Young
+Meeting Date: 11/28
+Meeting Attendees
+Alex De Young
+Devan Shea
+Nathan Casazza
+Nicole Clements
+Anna Slater  
+Meeting Agenda Items
+ Talk about the a public tab for customers
+ Discuss problem of documentation apps not being found
+ Talk about the progress being made in the server tab because it needed to be remodeled
+Status Update Since Last Meeting
+Accomplishments:
+We remodeled the customer side effectively with react components and have it auto update when the user selects and item
+Made the customer side’s order persistent when/if the user reloads the page
+
+Tasks Completed:
+Task Description
+Assigned to
+Completed? (yes/no)
+Remodeled the customer side
+Anna
+yes
+Made customer side and server side order persistent
+Alex
+yes
+
+Before The Next Meeting
+Plans:
+ Do research on the API’s we need and the react components that would accomplish that
+ Continue working on the manager side
+
+Task Assignments:
+Task Description
+Assigned to
+Keep working on the manager side
+Devan/Nathan
+Do API research
+Nicole/Anna
+Try to implement OAuth for the main screen
+Alex
+Add the ability to add seasonal items to the customer and server sides
+Nicole
+
+Minutes from Previous Meeting
+We decided we need to refactor the code for the customer and server side because it extensively uses local storage. We wanted to have the current order screen and price in the same screen as the screen that you selected the items in 0rder to provide the customer instant feedback. In order to do this we need to reload the current order and price function. We can’t tell when the option is benign erased with the local storage option so we had to rework our code to use react components. The time it took our backend guy was about 3 hours because it wasn’t too extensive, but we also have to change the server code because it uses the same local storage options. After this refractor we will start looking at API’s

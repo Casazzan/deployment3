@@ -3,7 +3,7 @@ import '../index2.css';
 import HomePageNavButton from './HomePageNavButton';
 
 import { useNavigate } from 'react-router-dom';
-import { GoogleLogin } from 'react-google-login';
+// import { GoogleLogin } from 'react-google-login';
 import { gapi } from 'gapi-script';
 const clientId = '569817754455-gefflnacglb4mubcrlp94bqknusirsld.apps.googleusercontent.com';
 
@@ -38,6 +38,15 @@ const LoginPage = () => {
         auth2.disconnect();
     };
     useEffect(() => {
+        window.gapi.signin2.render('gs2', {
+            'scope': 'https://www.googleapis.com/auth/plus.login',
+            'width': 200,
+            'height': 50,
+            'longtitle': true,
+            'theme': 'dark',
+            'onsuccess': onSuccessOther
+          });
+        }, []);
         const initClient = () => {
               gapi.client.init({
               clientId: clientId,
@@ -46,10 +55,10 @@ const LoginPage = () => {
          };
          gapi.load('client:auth2', initClient);
          
-     });
     return (
       <div class = "HomePageScreen">
             <div class = "homeLogo"></div>
+      {/*
             <GoogleLogin
             clientId={clientId}
             render={renderProps => (
@@ -59,8 +68,9 @@ const LoginPage = () => {
             onSuccess={onSuccessOther}
             onFailure={onFailure}
             cookiePolicy={'none'}
-            />
+            /> */}
           {/* <div class = "HomePageButton" id = "Login" onClick={() => {navigate("/View")}}><HomePageNavButton Name = "Login" /></div> */}
+          <div id="gs2"></div>
           <div class = "HomePageButton" id = "Public" onClick={() => {navigate("/CustMainPage")}}><HomePageNavButton Name = "Public View" /></div>
       </div>
       )

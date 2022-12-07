@@ -2,6 +2,12 @@ import React from 'react'
 import {useState, useEffect} from 'react'
 import axios from 'axios'
 
+/**
+* Creates a table to display critical items 
+* @function
+* param {props} itemList  - array of inventory objects to display
+* @returns {selector} to display 
+*/
 const CriticalItemsDisplay = (props) => {
   const [translations, setTranslations] = useState([
     { translatedText: "Name" }, 

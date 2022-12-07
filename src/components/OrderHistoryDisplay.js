@@ -3,6 +3,12 @@ import axios from 'axios'
 import { useState, useEffect } from 'react'
 
 
+/**
+* Creates table for order history
+* @function
+* @param {props} orderList - array of objects that contain order history information
+* @returns {tables} to display 
+*/
 const OrderHistoryDisplay = (props) => {
 
   const [translations, setTranslations] = useState([

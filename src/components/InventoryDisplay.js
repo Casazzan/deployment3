@@ -2,6 +2,11 @@ import React from 'react'
 import {useState, useEffect} from 'react'
 import axios from 'axios'
 
+/**
+* Displays Options for Inventory
+* @function
+* @returns {html} to display 
+*/
 const InventoryDisplay = (props) => {
   const [translations, setTranslations] = useState([
     { translatedText: "Item ID" }, 

@@ -6,6 +6,11 @@ import axios from 'axios'
 // https://www.w3schools.com/html/html_tables.asp
 // table 
 
+/**
+     * Displays Tabs for Employee Modifications and viewing
+     * @function
+     * @returns {html} returns the view for the empolee tab
+     */
 function EmployeeTabs() {
   /* these are useState hooks */
   const [toggleState, setToggleState] = useState(1);
@@ -29,6 +34,11 @@ function EmployeeTabs() {
     { translatedText: "Normal" }, 
     { translatedText: "Manager" }, 
   ]);
+/**
+     * translates all text fields within the employee tabs
+     * @function
+     * @returns {array of translated objects} each object has the result of a translated query 
+     */
   const changeLanguage = () => {
     // var selected = document.getElementById("selectedLanguageDiv").innerHTML;
     if (JSON.parse(localStorage.getItem("language")) != "en") {
@@ -84,7 +94,11 @@ function EmployeeTabs() {
   const toggleTab = (index) => {
     setToggleState(index);
   };
-
+/**
+     * Deletes a selected employee
+     * @function
+     * @returns {int} 0 for success and 1 for failure
+     */
   const deleteEmployee = async() => {
     var selected = document.getElementById("selectedEmployeeDiv").innerHTML;
     console.log(selected);
@@ -93,11 +107,18 @@ function EmployeeTabs() {
     const response = await promise;
   }
 
+/**
+     * Updates a selected employee
+     * @function
+     * @returns {int} 0 for success and 1 for failure
+     */
   const updateEmployee = async() => {
     var selected = document.getElementById("selectedEmployeeDiv").innerHTML;
     console.log("update employee: ", selected, changeType, email);
     const promise = fetch(`http://localhost:5000/roster/update_type?id=${selected}&manager=${changeType}`); 
     const response = await promise;
+    console.log("adding email");
+    addEmail();
   }
 
   useEffect(() => {
@@ -107,6 +128,11 @@ function EmployeeTabs() {
     return () => { ignore = true; }
     },[]);
 
+/**
+     * Queries the roster 
+     * @function
+     * @returns {obj[]} array of employee objects
+     */
   const queryRosterSummary = async() => {
     const promise = fetch(`http://localhost:5000/roster/summary`); 
     const response = await promise;
@@ -124,6 +150,11 @@ function EmployeeTabs() {
     console.log(email);
   }
 
+/**
+     * Adds an employee to database
+     * @function
+     * @returns {int} 0 for success and 1 for failure
+     */
   const addEmployee = async() => {
     const firstPromise = fetch(`http://localhost:5000/roster/nextID`); 
     const firstResponse = await firstPromise;
@@ -141,10 +172,16 @@ function EmployeeTabs() {
     console.log("Added: " + userInput + newID + type);
   }
 
+/**
+     * Adds an email authorized
+     * @function
+     * @returns {int} 0 for success and 1 for failure
+     */
   const addEmail = async() => {
     console.log("inserting "+ email);
-    // const promise = fetch(`http://localhost:5000/roster/add?id=${result.nextID}&name=${userInput}&manager=${type}`); 
-    // const response = await promise;
+    // /authorized_emails/add?email={email}
+    const promise = fetch(`http://localhost:5000/authorized_emails/add?email=${email}`); 
+    const response = await promise;
     setEmail("");
     // console.log("Added: " + userInput + newID + type);
   }
