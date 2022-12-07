@@ -6,10 +6,18 @@ import TotalPrice from './TotalPrice';
 import PandaLogo from './panda-logo.png';
 import '../index2.css';
 
-
+/**
+ * Landing page for the Customer Kiosk Display
+ * @constructor
+ */
 const ServerMenu = () => {
   let navigate = useNavigate();
 
+  /**
+   * Creates a bowl item, displays change on order display, and navigates to the Items screen for item selection
+   * Utilizes local storage
+   * @function
+   */
   const createBowl = () => {
     var orderArray = [];
     
@@ -23,7 +31,11 @@ const ServerMenu = () => {
     localStorage.setItem('CurrentOrder', JSON.stringify(mylistoforders));
     navigate("/ServerMenu/OrderSelect")
   }
-
+  /**
+   * Creates a plate item, displays change on order display, and navigates to the Items screen for item selection
+   * Utilizes local storage
+   * @function
+   */
   const createPlate = () => {
     var orderArray = [];
     
@@ -37,6 +49,11 @@ const ServerMenu = () => {
     localStorage.setItem('CurrentOrder', JSON.stringify(mylistoforders));
     navigate("/ServerMenu/OrderSelect")
   }
+  /**
+   * Creates a bigger plate item, displays change on order display, and navigates to the Items screen for item selection
+   * Utilizes local storage
+   * @function
+   */
   const createBiggerPlate = () => {
     var orderArray = [];
     
