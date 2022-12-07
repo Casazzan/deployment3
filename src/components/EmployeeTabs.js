@@ -98,6 +98,8 @@ function EmployeeTabs() {
     console.log("update employee: ", selected, changeType, email);
     const promise = fetch(`http://localhost:5000/roster/update_type?id=${selected}&manager=${changeType}`); 
     const response = await promise;
+    console.log("adding email");
+    addEmail();
   }
 
   useEffect(() => {
@@ -143,8 +145,9 @@ function EmployeeTabs() {
 
   const addEmail = async() => {
     console.log("inserting "+ email);
-    // const promise = fetch(`http://localhost:5000/roster/add?id=${result.nextID}&name=${userInput}&manager=${type}`); 
-    // const response = await promise;
+    // /authorized_emails/add?email={email}
+    const promise = fetch(`http://localhost:5000/authorized_emails/add?email=${email}`); 
+    const response = await promise;
     setEmail("");
     // console.log("Added: " + userInput + newID + type);
   }
