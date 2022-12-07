@@ -1,5 +1,11 @@
 import {useState} from 'react';
 
+/**
+* Creates selector to display items to choose
+* @function
+* param {props} rosterList - array of inventory objects to display
+* @returns {selector} to display 
+*/
 const InventorySelector = (props) => {
 
   const [selectedItem, setSelectedItem] = useState('');

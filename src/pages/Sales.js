@@ -3,6 +3,11 @@ import {Component} from 'react';
 import OrderHistory from '../components/OrderHistory';
 import Sidebar from '../components/Sidebar'
 
+/**
+* Displays order history information and settings
+* @function
+* @returns {html} to display 
+*/
 class Sales extends Component {
   constructor(props) {
     super(props);
