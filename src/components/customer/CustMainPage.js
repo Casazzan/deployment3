@@ -10,10 +10,9 @@ import "./CustMainPage.css";
 import CustomerViewBtn from "../CustomerViewBtn";
 
 import Logo from './pandaLogo.png';
-import Text from 'react-text';
 import FoodBackground from './pandaFood.jpeg';
 import axios from 'axios'
-import LanguageSettings from '../LanguageSettings'
+import LanguageSettings from '../PublicLanguageSettings'
 import { useState, useEffect } from "react";
 
 /**
@@ -61,11 +60,11 @@ const CustMainPage = (props) => {
 
   const changeText = () => {
     // var selected = document.getElementById("selectedLanguageDiv").innerHTML;
-    if (localStorage.getItem("language") == null) {
-      localStorage.setItem("language", JSON.stringify("en"));
+    if (localStorage.getItem("pub-language") == null) {
+      localStorage.setItem("pub-language", JSON.stringify("en"));
     }
-    console.log(localStorage.getItem("language"))
-    if (localStorage.getItem("language") != "en") {
+    console.log(localStorage.getItem("pub-language"))
+    if (localStorage.getItem("pub-language") != "en") {
       const encodedParams = new URLSearchParams();
       encodedParams.append("q", "Submit"); // translations[0].translatedText
       encodedParams.append("q", "Back");// translations[1].translatedText
@@ -73,7 +72,7 @@ const CustMainPage = (props) => {
       encodedParams.append("q", "View Menu");
       encodedParams.append("q", "Welcome to Panda Express");
       encodedParams.append("q", "We are a fast food restaurant chain that serves American Chinese cuisine. You can view our menu here on our site. Then, once you're ready to head to a store to place an order, click on 'Find Restaraunt' to get directions to one of our 2,000 locations. Hope to see you soon!");
-      encodedParams.append("target", JSON.parse(localStorage.getItem("language")));
+      encodedParams.append("target", JSON.parse(localStorage.getItem("pub-language")));
       encodedParams.append("source", "en");
 
       const options = {
@@ -108,8 +107,8 @@ const CustMainPage = (props) => {
   useEffect(() => {
     console.log("use effect here")
     getLanguages()
-    if (localStorage.getItem("language") == null) {
-      localStorage.setItem("language", JSON.stringify("en"));
+    if (localStorage.getItem("pub-language") == null) {
+      localStorage.setItem("pub-language", JSON.stringify("en"));
       console.log("made it to change text")
       changeText()
       window.location.reload(false)
@@ -123,9 +122,9 @@ const CustMainPage = (props) => {
   const changeLanguage = () => {
     var selected = document.getElementById("selectedLanguageDiv").innerHTML;
     setLanguage(selected)
-    localStorage.setItem("language", JSON.stringify(selected));
+    localStorage.setItem("pub-language", JSON.stringify(selected));
     window.dispatchEvent(new Event("storage"));
-    const rawLanguage = localStorage.getItem("language");
+    const rawLanguage = localStorage.getItem("pub-language");
     const language = JSON.parse(rawLanguage);
     console.log("LOCAL STORAGE: ", language);
   }
@@ -162,7 +161,7 @@ const CustMainPage = (props) => {
 
           <LanguageSettings className="LanguageBox" languageList={languages} />
 
-        <button className="SubmitLanguageBox" onClick={() => changeLanguage()}>{translations[0].translatedText}</button>
+        <button className="PubSubmitLanguage" onClick={() => changeLanguage()}>{translations[0].translatedText}</button>
 
       </div>
 
