@@ -37,7 +37,7 @@ function EmployeeTabs() {
 /**
      * translates all text fields within the employee tabs
      * @function
-     * @returns {array of translated objects} each object has the result of a translated query 
+     * @returns {ArrayOfObjects} each object has the result of a translated query 
      */
   const changeLanguage = () => {
     // var selected = document.getElementById("selectedLanguageDiv").innerHTML;
@@ -131,7 +131,7 @@ function EmployeeTabs() {
 /**
      * Queries the roster 
      * @function
-     * @returns {obj[]} array of employee objects
+     * @returns {Object} array of employee objects
      */
   const queryRosterSummary = async() => {
     const promise = fetch(`http://localhost:5000/roster/summary`); 

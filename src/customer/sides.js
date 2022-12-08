@@ -14,6 +14,11 @@ import AddSeasonal from "./AddSeasonal";
 import {useState, useEffect} from 'react'
 import axios from 'axios'
 
+/**
+* Creates sides section on menu 
+* @function
+*/
+
 const Sides = (props) => {
 
     const [translations, setTranslations] = useState([

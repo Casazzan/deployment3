@@ -20,6 +20,11 @@ import AddSeasonal from "./AddSeasonal";
 import {useState, useEffect} from 'react'
 import axios from 'axios'
 
+/**
+* Creates entrees section on menu 
+* @function
+*/
+
 const Entrees = (props) => {
 
         const [translations, setTranslations] = useState([

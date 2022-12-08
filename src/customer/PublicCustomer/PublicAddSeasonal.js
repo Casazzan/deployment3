@@ -3,6 +3,11 @@ import React from 'react'
 import seasonal from '../comingSoon.png';
 import ItemBox from "../PublicItemBox";
 
+/**
+* Implements functionality to add seasonal item to public customer menu
+* @class
+*/
+
 class PublicAddSeasonal extends React.Component {
 
     constructor(props) {

@@ -17,6 +17,11 @@ import AddSeasonal from "./PublicAddSeasonal";
 
 import {useState, useEffect} from 'react'
 import axios from 'axios'
+
+/**
+* Implements public menu entree tab
+* @function
+*/
   
 const PublicEntrees = (props) => {
   

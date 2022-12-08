@@ -6,6 +6,12 @@ import { useNavigate } from 'react-router-dom';
 //import { useNavigate, Link } from 'react-router-dom';
 
 
+/**
+* Implements public menu header
+* @function
+*/
+      
+
 const PublicHeader = (props) => {
 
   let navigate = useNavigate();
