@@ -180,9 +180,11 @@ function EmployeeTabs() {
   const addEmail = async() => {
     console.log("inserting "+ email);
     // /authorized_emails/add?email={email}
-    const promise = fetch(`http://localhost:5000/authorized_emails/add?email=${email}`); 
-    const response = await promise;
-    setEmail("");
+    if (email != "") {
+      const promise = fetch(`http://localhost:5000/authorized_emails/add?email=${email}`); 
+      const response = await promise;
+      setEmail("");
+    }
     // console.log("Added: " + userInput + newID + type);
   }
 
