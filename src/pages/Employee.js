@@ -1,8 +1,8 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import EmployeeTabs from "../components/EmployeeTabs";
-import {Component} from 'react';
-import Sidebar from '../components/Sidebar'
-import logo from '../team52.png'
+import { Component } from "react";
+import Sidebar from "../components/Sidebar";
+import logo from "../team52.png";
 
 class Employee extends Component {
   constructor(props) {
@@ -11,20 +11,22 @@ class Employee extends Component {
   }
 
   getSummary = () => {
-      fetch("http://localhost:5000/roster?id=2")
-          .then(res => res.text())
-          .then(res => this.setState({ apiResponse: res }, () => console.log(res)));
-  }
+    fetch("https://panda-express-deployment-3.onrender.com/roster?id=2")
+      .then((res) => res.text())
+      .then((res) =>
+        this.setState({ apiResponse: res }, () => console.log(res))
+      );
+  };
   render() {
     return (
       <div>
         <Sidebar />
         <div className="Right">
-        <EmployeeTabs />
+          <EmployeeTabs />
         </div>
       </div>
-    )
+    );
   }
 }
 
-export default Employee; 
+export default Employee;

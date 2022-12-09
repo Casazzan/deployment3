@@ -1,39 +1,42 @@
 import { useState } from "react";
 import "../App.css";
-import Critical from './CriticalItemsDisplay'
-import Summary from './InventoryDisplay'
+import Critical from "./CriticalItemsDisplay";
+import Summary from "./InventoryDisplay";
 
 // https://www.w3schools.com/html/html_tables.asp
-// table 
+// table
 
 function InventoryTabs() {
   const [toggleState, setToggleState] = useState(1);
-  const [name, setName] = useState('');
+  const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
   const [initial, setInitial] = useState(0);
   const [restock, setRestock] = useState(0);
   const [critical, setCritical] = useState(0);
-  const [type, setType] = useState('entree');
-  const [updateItemName, setUpdateItemName] = useState('Orange Chicken');
-  const [updateItemAmount, setUpdateItemAmount] = useState('0');
-  const [criticalItems, setCriticalResponse] = useState('0');
-  const [inventorySummary, setInventorySummary] = useState('0');
-
+  const [type, setType] = useState("entree");
+  const [updateItemName, setUpdateItemName] = useState("Orange Chicken");
+  const [updateItemAmount, setUpdateItemAmount] = useState("0");
+  const [criticalItems, setCriticalResponse] = useState("0");
+  const [inventorySummary, setInventorySummary] = useState("0");
 
   const toggleTab = (index) => {
     setToggleState(index);
   };
 
-  const queryCrit = async() => {
-    const promise = fetch(`http://localhost:5000/report/restock`); 
+  const queryCrit = async () => {
+    const promise = fetch(
+      `https://panda-express-deployment-3.onrender.com/report/restock`
+    );
     const response = await promise;
     const result = await response.json();
     console.log(result);
     setCriticalResponse(result);
   };
 
-  const queryInventory = async() => {
-    const promise = fetch(`http://localhost:5000/inventory/summary`); 
+  const queryInventory = async () => {
+    const promise = fetch(
+      `https://panda-express-deployment-3.onrender.com/inventory/summary`
+    );
     const response = await promise;
     const result = await response.json();
     console.log(result);
@@ -42,9 +45,7 @@ function InventoryTabs() {
 
   // reset values to 0
   // setname ... 0
-  const addItem = async() => {
-  };
-
+  const addItem = async () => {};
 
   return (
     <div className="container">
@@ -53,19 +54,19 @@ function InventoryTabs() {
           className={toggleState === 1 ? "tabs active-tabs" : "tabs"}
           onClick={() => toggleTab(1)}
         >
-        View Inventory
+          View Inventory
         </button>
         <button
           className={toggleState === 2 ? "tabs active-tabs" : "tabs"}
           onClick={() => toggleTab(2)}
         >
-        Add New Item
+          Add New Item
         </button>
         <button
           className={toggleState === 3 ? "tabs active-tabs" : "tabs"}
           onClick={() => toggleTab(3)}
         >
-        Update Values
+          Update Values
         </button>
       </div>
 
@@ -75,11 +76,17 @@ function InventoryTabs() {
         >
           <h2>Current Inventory</h2>
 
-          <button className="SubmitCritical" onClick={() => queryInventory()}> View Inventory</button>
-          <Critical inventoryList={inventorySummary}/>
+          <button className="SubmitCritical" onClick={() => queryInventory()}>
+            {" "}
+            View Inventory
+          </button>
+          <Critical inventoryList={inventorySummary} />
           <p></p>
-          <button className="SubmitCritical" onClick={() => queryCrit()}> View Critical Items</button>
-          <Critical itemList={criticalItems}/>
+          <button className="SubmitCritical" onClick={() => queryCrit()}>
+            {" "}
+            View Critical Items
+          </button>
+          <Critical itemList={criticalItems} />
           <p></p>
         </div>
 
@@ -131,14 +138,11 @@ function InventoryTabs() {
             />
             <p></p>
             <label> Enter Type </label>
-            <select
-              value={type}
-              onChange={(e) => setType(e.target.value)}
-            >
+            <select value={type} onChange={(e) => setType(e.target.value)}>
               <option value="side">side</option>
               <option value="entree">entree</option>
               <option value="appetizer">appetizer</option>
-            </select> 
+            </select>
             <p></p>
             <button className="SubmitButton">Add Item</button>
             <p>
@@ -148,7 +152,6 @@ function InventoryTabs() {
               {initial}
               {restock}
             </p>
-
           </form>
         </div>
 
@@ -156,11 +159,11 @@ function InventoryTabs() {
           className={toggleState === 3 ? "content  active-content" : "content"}
         >
           <h2>Restock Options</h2>
-            <p></p>
-            <button className="SubmitCritical">Restock All</button>
-            <p></p>
-            <button className="SubmitCritical">Restock Critical</button>
-            <p></p>
+          <p></p>
+          <button className="SubmitCritical">Restock All</button>
+          <p></p>
+          <button className="SubmitCritical">Restock Critical</button>
+          <p></p>
           <hr />
           <h2>Manually Update Inventory</h2>
           <form>
@@ -169,10 +172,14 @@ function InventoryTabs() {
               value={type}
               onChange={(e) => setUpdateItemName(e.target.value)}
             >
-              <option value="sweetfire_chicken_breast">sweetfire_chicken_breast</option>
+              <option value="sweetfire_chicken_breast">
+                sweetfire_chicken_breast
+              </option>
               <option value="kung_pao_chicken">kung_pao_chicken</option>
               <option value="black_pepper_chicken">black_pepper_chicken</option>
-              <option value="grilled_teriyaki_chicken">grilled_teriyaki_chicken</option>
+              <option value="grilled_teriyaki_chicken">
+                grilled_teriyaki_chicken
+              </option>
               <option value="broccoli_beef">broccoli_beef</option>
               <option value="bejing_beef">bejing_beef</option>
               <option value="honey_walnut_shrimp">honey_walnut_shrimp</option>
@@ -183,8 +190,10 @@ function InventoryTabs() {
               <option value="fried_rice">fried_rice</option>
               <option value="brown_steamed_rice">brown_steamed_rice</option>
               <option value="crispy_shrimp">crispy_shrimp</option>
-              <option value="string_bean_chicken_breast">string_bean_chicken_breast</option>
-            </select> 
+              <option value="string_bean_chicken_breast">
+                string_bean_chicken_breast
+              </option>
+            </select>
             <p></p>
             <label>Input New Amount: </label>
             <input
@@ -196,8 +205,8 @@ function InventoryTabs() {
             <p></p>
             <button className="SubmitCritical">Submit</button>
           </form>
-        {updateItemName}
-        {updateItemAmount}
+          {updateItemName}
+          {updateItemAmount}
         </div>
       </div>
     </div>

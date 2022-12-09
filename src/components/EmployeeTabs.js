@@ -1,44 +1,44 @@
-import RosterDisplay from './RosterDisplay';
-import RosterSelector from './RosterSelector';
-import {useState, useEffect} from 'react';
-import axios from 'axios'
+import RosterDisplay from "./RosterDisplay";
+import RosterSelector from "./RosterSelector";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 // https://www.w3schools.com/html/html_tables.asp
-// table 
+// table
 
 /**
-     * Displays Tabs for Employee Modifications and viewing
-     * @function
-     * @returns {html} returns the view for the empolee tab
-     */
+ * Displays Tabs for Employee Modifications and viewing
+ * @function
+ * @returns {html} returns the view for the empolee tab
+ */
 function EmployeeTabs() {
   /* these are useState hooks */
   const [toggleState, setToggleState] = useState(1);
-  const [type, setType] = useState('0');
-  const [changeType, setChangeType] = useState('0');
-  const [RosterSummary, setRosterSummary] = useState('');
-  const [userInput, setUserInput] = useState(''); 
-  const [email, setEmail] = useState(''); 
+  const [type, setType] = useState("0");
+  const [changeType, setChangeType] = useState("0");
+  const [RosterSummary, setRosterSummary] = useState("");
+  const [userInput, setUserInput] = useState("");
+  const [email, setEmail] = useState("");
   const [translations, setTranslations] = useState([
-    { translatedText: "View Employees" }, 
-    { translatedText: "Roster" }, 
-    { translatedText: "Add Employee" }, 
-    { translatedText: "Enter Name" }, 
-    { translatedText: "Enter Type" }, 
-    { translatedText: "Update" }, 
-    { translatedText: "Modify Employee" }, 
-    { translatedText: "Select the employee you wish to modify" }, 
-    { translatedText: "Select New Type" }, 
-    { translatedText: "Enter Email Address" }, 
-    { translatedText: "Delete" }, 
-    { translatedText: "Normal" }, 
-    { translatedText: "Manager" }, 
+    { translatedText: "View Employees" },
+    { translatedText: "Roster" },
+    { translatedText: "Add Employee" },
+    { translatedText: "Enter Name" },
+    { translatedText: "Enter Type" },
+    { translatedText: "Update" },
+    { translatedText: "Modify Employee" },
+    { translatedText: "Select the employee you wish to modify" },
+    { translatedText: "Select New Type" },
+    { translatedText: "Enter Email Address" },
+    { translatedText: "Delete" },
+    { translatedText: "Normal" },
+    { translatedText: "Manager" },
   ]);
-/**
-     * translates all text fields within the employee tabs
-     * @function
-     * @returns {ArrayOfObjects} each object has the result of a translated query 
-     */
+  /**
+   * translates all text fields within the employee tabs
+   * @function
+   * @returns {ArrayOfObjects} each object has the result of a translated query
+   */
   const changeLanguage = () => {
     // var selected = document.getElementById("selectedLanguageDiv").innerHTML;
     if (JSON.parse(localStorage.getItem("language")) != "en") {
@@ -56,85 +56,98 @@ function EmployeeTabs() {
       encodedParams.append("q", "Delete");
       encodedParams.append("q", "Normal");
       encodedParams.append("q", "Manager");
-      encodedParams.append("target", JSON.parse(localStorage.getItem("language")));
+      encodedParams.append(
+        "target",
+        JSON.parse(localStorage.getItem("language"))
+      );
       encodedParams.append("source", "en");
 
       const options = {
-        method: 'POST',
-        url: 'https://google-translate1.p.rapidapi.com/language/translate/v2',
+        method: "POST",
+        url: "https://google-translate1.p.rapidapi.com/language/translate/v2",
         headers: {
-          'content-type': 'application/x-www-form-urlencoded',
-          'Accept-Encoding': 'application/gzip',
-          'X-RapidAPI-Key': '8fbc873fd8msh5d43e6022f22f64p15f17ejsnbb456384ba17',
-          'X-RapidAPI-Host': 'google-translate1.p.rapidapi.com'
+          "content-type": "application/x-www-form-urlencoded",
+          "Accept-Encoding": "application/gzip",
+          "X-RapidAPI-Key":
+            "8fbc873fd8msh5d43e6022f22f64p15f17ejsnbb456384ba17",
+          "X-RapidAPI-Host": "google-translate1.p.rapidapi.com",
         },
-        data: encodedParams
+        data: encodedParams,
       };
 
-      axios.request(options).then(function (response) {
-          const translatedArray = response.data.data.translations
+      axios
+        .request(options)
+        .then(function (response) {
+          const translatedArray = response.data.data.translations;
           // console.log("Within OrderHistory Display: ", response.data.data.translations)
           // console.log("Specific Element: ", translations[0].translatedText)
-          setTranslations(translatedArray)
+          setTranslations(translatedArray);
           // console.log("Test", translations)
-          
-      }).catch(function (error) {
+        })
+        .catch(function (error) {
           console.error(error);
-      });
+        });
+    } else {
+      console.log("english");
     }
-    else {
-      console.log("english")
-    }
-  }
+  };
 
-  useEffect(() => {    
-    changeLanguage()
+  useEffect(() => {
+    changeLanguage();
   }, [setTranslations]);
 
   const toggleTab = (index) => {
     setToggleState(index);
   };
-/**
-     * Deletes a selected employee
-     * @function
-     * @returns {int} 0 for success and 1 for failure
-     */
-  const deleteEmployee = async() => {
+  /**
+   * Deletes a selected employee
+   * @function
+   * @returns {int} 0 for success and 1 for failure
+   */
+  const deleteEmployee = async () => {
     var selected = document.getElementById("selectedEmployeeDiv").innerHTML;
     console.log(selected);
     console.log("delete employee: ", selected);
-    const promise = fetch(`http://localhost:5000/roster/delete?id=${selected}`); 
+    const promise = fetch(
+      `https://panda-express-deployment-3.onrender.com/roster/delete?id=${selected}`
+    );
     const response = await promise;
-  }
+  };
 
-/**
-     * Updates a selected employee
-     * @function
-     * @returns {int} 0 for success and 1 for failure
-     */
-  const updateEmployee = async() => {
+  /**
+   * Updates a selected employee
+   * @function
+   * @returns {int} 0 for success and 1 for failure
+   */
+  const updateEmployee = async () => {
     var selected = document.getElementById("selectedEmployeeDiv").innerHTML;
     console.log("update employee: ", selected, changeType, email);
-    const promise = fetch(`http://localhost:5000/roster/update_type?id=${selected}&manager=${changeType}`); 
+    const promise = fetch(
+      `https://panda-express-deployment-3.onrender.com/roster/update_type?id=${selected}&manager=${changeType}`
+    );
     const response = await promise;
     console.log("adding email");
     addEmail();
-  }
+  };
 
   useEffect(() => {
     let ignore = false;
 
-    if (!ignore)  queryRosterSummary()
-    return () => { ignore = true; }
-    },[]);
+    if (!ignore) queryRosterSummary();
+    return () => {
+      ignore = true;
+    };
+  }, []);
 
-/**
-     * Queries the roster 
-     * @function
-     * @returns {Object} array of employee objects
-     */
-  const queryRosterSummary = async() => {
-    const promise = fetch(`http://localhost:5000/roster/summary`); 
+  /**
+   * Queries the roster
+   * @function
+   * @returns {Object} array of employee objects
+   */
+  const queryRosterSummary = async () => {
+    const promise = fetch(
+      `https://panda-express-deployment-3.onrender.com/roster/summary`
+    );
     const response = await promise;
     const result = await response.json();
     console.log(result);
@@ -144,19 +157,21 @@ function EmployeeTabs() {
   const inputchangehandler = (event) => {
     setUserInput(event.target.value);
     console.log(userInput);
-  }
+  };
   const emailHandler = (event) => {
     setEmail(event.target.value);
     console.log(email);
-  }
+  };
 
-/**
-     * Adds an employee to database
-     * @function
-     * @returns {int} 0 for success and 1 for failure
-     */
-  const addEmployee = async() => {
-    const firstPromise = fetch(`http://localhost:5000/roster/nextID`); 
+  /**
+   * Adds an employee to database
+   * @function
+   * @returns {int} 0 for success and 1 for failure
+   */
+  const addEmployee = async () => {
+    const firstPromise = fetch(
+      `https://panda-express-deployment-3.onrender.com/roster/nextID`
+    );
     const firstResponse = await firstPromise;
     const result = await firstResponse.json();
     var newID = result.nextID;
@@ -164,29 +179,33 @@ function EmployeeTabs() {
     console.log("userInput: ", userInput);
     console.log("type: ", type);
     console.log(result.nextID);
-    console.log("inserting "+ userInput, newID, type);
-    const promise = fetch(`http://localhost:5000/roster/add?id=${result.nextID}&name=${userInput}&manager=${type}`); 
+    console.log("inserting " + userInput, newID, type);
+    const promise = fetch(
+      `https://panda-express-deployment-3.onrender.com/roster/add?id=${result.nextID}&name=${userInput}&manager=${type}`
+    );
     const response = await promise;
     setUserInput("");
     setType(0);
     console.log("Added: " + userInput + newID + type);
-  }
+  };
 
-/**
-     * Adds an email authorized
-     * @function
-     * @returns {int} 0 for success and 1 for failure
-     */
-  const addEmail = async() => {
-    console.log("inserting "+ email);
+  /**
+   * Adds an email authorized
+   * @function
+   * @returns {int} 0 for success and 1 for failure
+   */
+  const addEmail = async () => {
+    console.log("inserting " + email);
     // /authorized_emails/add?email={email}
     if (email != "") {
-      const promise = fetch(`http://localhost:5000/authorized_emails/add?email=${email}`); 
+      const promise = fetch(
+        `https://panda-express-deployment-3.onrender.com/authorized_emails/add?email=${email}`
+      );
       const response = await promise;
       setEmail("");
     }
     // console.log("Added: " + userInput + newID + type);
-  }
+  };
 
   return (
     <div className="container">
@@ -195,19 +214,19 @@ function EmployeeTabs() {
           className={toggleState === 1 ? "tabs active-tabs" : "tabs"}
           onClick={() => toggleTab(1)}
         >
-        { translations[0].translatedText }
+          {translations[0].translatedText}
         </button>
         <button
           className={toggleState === 2 ? "tabs active-tabs" : "tabs"}
           onClick={() => toggleTab(2)}
         >
-        { translations[2].translatedText }
+          {translations[2].translatedText}
         </button>
         <button
           className={toggleState === 3 ? "tabs active-tabs" : "tabs"}
           onClick={() => toggleTab(3)}
         >
-        { translations[6].translatedText } 
+          {translations[6].translatedText}
         </button>
       </div>
 
@@ -215,73 +234,83 @@ function EmployeeTabs() {
         <div
           className={toggleState === 1 ? "content  active-content" : "content"}
         >
-          <h2> { translations[1].translatedText } </h2>
-          <RosterDisplay rosterList={RosterSummary}/>
+          <h2> {translations[1].translatedText} </h2>
+          <RosterDisplay rosterList={RosterSummary} />
           <p></p>
         </div>
 
         <div
           className={toggleState === 2 ? "content  active-content" : "content"}
         >
-          <h2> { translations[2].translatedText } </h2>
+          <h2> {translations[2].translatedText} </h2>
           <hr />
-              <label> { translations[3].translatedText }: </label>
-              <input type="text" name="name" 
-                    onChange={inputchangehandler} 
-                    value = {userInput}/>
-              <p></p>
-              <label> { translations[4].translatedText }: </label>
-              <select
-                value={type}
-                onChange={(e) => setType(e.target.value)}
-              >
-                <option value="1"> { translations[12].translatedText } </option>
-                <option value="0"> { translations[11].translatedText } </option>
-              </select> 
-              <p></p>
-              <button className="SubmitButton" id="delete" onClick={() => addEmployee()}> { translations[5].translatedText } </button>
-              <p>
-              </p>
+          <label> {translations[3].translatedText}: </label>
+          <input
+            type="text"
+            name="name"
+            onChange={inputchangehandler}
+            value={userInput}
+          />
+          <p></p>
+          <label> {translations[4].translatedText}: </label>
+          <select value={type} onChange={(e) => setType(e.target.value)}>
+            <option value="1"> {translations[12].translatedText} </option>
+            <option value="0"> {translations[11].translatedText} </option>
+          </select>
+          <p></p>
+          <button
+            className="SubmitButton"
+            id="delete"
+            onClick={() => addEmployee()}
+          >
+            {" "}
+            {translations[5].translatedText}{" "}
+          </button>
+          <p></p>
         </div>
 
         <div
           className={toggleState === 3 ? "content  active-content" : "content"}
         >
-          <h2> { translations[6].translatedText } </h2>
+          <h2> {translations[6].translatedText} </h2>
           <hr />
-              <label> {translations[7].translatedText } </label>
-              <RosterSelector 
-                rosterList={RosterSummary}/>
-              <p></p>
+          <label> {translations[7].translatedText} </label>
+          <RosterSelector rosterList={RosterSummary} />
+          <p></p>
 
-              <label> { translations[8].translatedText } : </label>
-              <select
-                value={changeType}
-                onChange={(e) => setChangeType(e.target.value)}
-              >
-                <option value="1">Manager</option>
-                <option value="0">Regular Employee</option>
-              </select>
-              <p></p>
-              <label> { translations[9].translatedText } : </label>
-              <input type="text" email="email" 
-                    onChange={emailHandler} 
-                    value = {email}/>
-              <p></p>
-              <p></p>
+          <label> {translations[8].translatedText} : </label>
+          <select
+            value={changeType}
+            onChange={(e) => setChangeType(e.target.value)}
+          >
+            <option value="1">Manager</option>
+            <option value="0">Regular Employee</option>
+          </select>
+          <p></p>
+          <label> {translations[9].translatedText} : </label>
+          <input
+            type="text"
+            email="email"
+            onChange={emailHandler}
+            value={email}
+          />
+          <p></p>
+          <p></p>
 
-              <button 
-                className="SubmitButton" 
-                id="delete" 
-                onClick={() => deleteEmployee()} >
-                { translations[10].translatedText } 
-              </button>
-              <button 
-                className="SubmitButton" 
-                id="update" 
-                onClick={() => updateEmployee()} >
-                { translations[5].translatedText } 
-              </button>
+          <button
+            className="SubmitButton"
+            id="delete"
+            onClick={() => deleteEmployee()}
+          >
+            {translations[10].translatedText}
+          </button>
+          <button
+            className="SubmitButton"
+            id="update"
+            onClick={() => updateEmployee()}
+          >
+            {translations[5].translatedText}
+          </button>
         </div>
       </div>
     </div>

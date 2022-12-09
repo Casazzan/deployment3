@@ -1,21 +1,22 @@
 import React, { Component } from "react";
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
 
 class App extends Component {
-
   constructor(props) {
     super(props);
     this.state = { apiResponse: "t" };
   }
 
   callAPI = () => {
-      fetch("http://localhost:5000/roster?id=2")
-          .then(res => res.text())
-          .then(res => this.setState({ apiResponse: res }, () => console.log(res)));
-  }
+    fetch("https://panda-express-deployment-3.onrender.com/roster?id=2")
+      .then((res) => res.text())
+      .then((res) =>
+        this.setState({ apiResponse: res }, () => console.log(res))
+      );
+  };
 
-  render() {  
+  render() {
     return (
       <div className="App">
         <header className="App-header">

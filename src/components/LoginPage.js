@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
-import '../index2.css';
-import HomePageNavButton from './HomePageNavButton';
+import "../index2.css";
+import HomePageNavButton from "./HomePageNavButton";
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 // import { GoogleLogin } from 'react-google-login';
-import { gapi } from 'gapi-script';
-const clientId = '569817754455-gefflnacglb4mubcrlp94bqknusirsld.apps.googleusercontent.com';
+import { gapi } from "gapi-script";
+const clientId =
+  "569817754455-gefflnacglb4mubcrlp94bqknusirsld.apps.googleusercontent.com";
 
 var wasSuccessful = false;
 
@@ -15,8 +16,8 @@ var wasSuccessful = false;
  * @param {Array} err - String containing the text explaining why the OAuth errored
  */
 const onFailure = (err) => {
-    console.log('failed:', err);
-    wasSuccessful = false;
+  console.log("failed:", err);
+  wasSuccessful = false;
 };
 
 /**
@@ -25,39 +26,39 @@ const onFailure = (err) => {
  * @return {Component} The Login Button
  */
 const LoginPage = () => {
-    let navigate = useNavigate();
-    const onSuccessOther = async (res) => {
-        console.log('success:', res);
-        wasSuccessful = true;
-        navigate("/View")
-        var auth2 = gapi.auth2.getAuthInstance();
-        var profile = auth2.currentUser.get().getBasicProfile();
-        console.log("NAME-->"+profile.getName());
-        console.log("Email-->"+profile.getEmail());
-        // var authorizedEmails = fetch("http://localhost:5000/authorized_emails/summary");
-        auth2.disconnect();
-    };
-    useEffect(() => {
-        window.gapi.signin2.render('gs2', {
-            'scope': 'https://www.googleapis.com/auth/plus.login',
-            'width': 200,
-            'height': 50,
-            'longtitle': true,
-            'theme': 'dark',
-            'onsuccess': onSuccessOther
-          });
-        }, []);
-        const initClient = () => {
-              gapi.client.init({
-              clientId: clientId,
-              scope: 'email'
-            });
-         };
-         gapi.load('client:auth2', initClient);
-         
-    return (
-      <div class = "HomePageScreen">
-            <div class = "homeLogo"></div>
+  let navigate = useNavigate();
+  const onSuccessOther = async (res) => {
+    console.log("success:", res);
+    wasSuccessful = true;
+    navigate("/View");
+    var auth2 = gapi.auth2.getAuthInstance();
+    var profile = auth2.currentUser.get().getBasicProfile();
+    console.log("NAME-->" + profile.getName());
+    console.log("Email-->" + profile.getEmail());
+    // var authorizedEmails = fetch("https://panda-express-deployment-3.onrender.com/authorized_emails/summary");
+    auth2.disconnect();
+  };
+  useEffect(() => {
+    window.gapi.signin2.render("gs2", {
+      scope: "https://www.googleapis.com/auth/plus.login",
+      width: 200,
+      height: 50,
+      longtitle: true,
+      theme: "dark",
+      onsuccess: onSuccessOther,
+    });
+  }, []);
+  const initClient = () => {
+    gapi.client.init({
+      clientId: clientId,
+      scope: "email",
+    });
+  };
+  gapi.load("client:auth2", initClient);
+
+  return (
+    <div class="HomePageScreen">
+      <div class="homeLogo"></div>
       {/*
             <GoogleLogin
             clientId={clientId}
@@ -69,11 +70,19 @@ const LoginPage = () => {
             onFailure={onFailure}
             cookiePolicy={'none'}
             /> */}
-          {/* <div class = "HomePageButton" id = "Login" onClick={() => {navigate("/View")}}><HomePageNavButton Name = "Login" /></div> */}
-          <div id="gs2"></div>
-          <div class = "HomePageButton" id = "Public" onClick={() => {navigate("/CustMainPage")}}><HomePageNavButton Name = "Public View" /></div>
+      {/* <div class = "HomePageButton" id = "Login" onClick={() => {navigate("/View")}}><HomePageNavButton Name = "Login" /></div> */}
+      <div id="gs2"></div>
+      <div
+        class="HomePageButton"
+        id="Public"
+        onClick={() => {
+          navigate("/CustMainPage");
+        }}
+      >
+        <HomePageNavButton Name="Public View" />
       </div>
-      )
-  }
-  
-  export default LoginPage
+    </div>
+  );
+};
+
+export default LoginPage;
